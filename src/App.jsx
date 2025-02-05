@@ -1,41 +1,32 @@
-import { useState } from 'react'
+// import { useState } from 'react'
+// import reactLogo from './assets/react.svg'
+// import viteLogo from '/vite.svg'
+// import './App.css'
+// import MyComponent from './components/learn/MyComponent'
+// import { SecondComponent, ThirdComponent } from './components/learn/SecondComponent'
+
+import './components/todoList/todo.css';
 import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import MyComponent from './components/learn/MyComponent'
-import { SecondComponent, ThirdComponent } from './components/learn/SecondComponent'
+import TodoBox1 from './components/todoList/TodoBox1';
+import TodoBox2 from './components/todoList/TodoBox2';
 
 const App = () => {
-  const [count, setCount] = useState(0)
+  // const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Hello Word</h1>
+      <div className="todo-container">
+        <h1 className='todo-title'>TO DO LIST</h1>
 
-      {/* Components */}
-      <MyComponent />
-      <SecondComponent />
-      <ThirdComponent />
+        <TodoBox1 />
+        <TodoBox2 />
 
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        <div className='todo-logo'>
+          <img src={reactLogo} alt="" />
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <img src="" alt="" />
     </>
   )
 }
