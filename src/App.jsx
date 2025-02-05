@@ -13,13 +13,22 @@ import TodoBox2 from './components/todoList/TodoBox2';
 const App = () => {
   // const [count, setCount] = useState(0)
 
+  const clb = 'Chelsea';
+  const info = {
+    name: 'Hieu',
+    age: 22
+  }
+
   return (
     <>
       <div className="todo-container">
         <h1 className='todo-title'>TO DO LIST</h1>
 
         <TodoBox1 />
-        <TodoBox2 />
+        <TodoBox2
+          club={clb}
+          information={info}
+        />
 
         <div className='todo-logo'>
           <img src={reactLogo} alt="" />
