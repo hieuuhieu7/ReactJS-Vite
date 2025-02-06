@@ -1,12 +1,13 @@
 import { useState } from "react";
 
 const TodoBox1 = (props) => {
-    const { myFunction } = props;
+    const { addNewTodo } = props;
     // myFunction('Hieu');
 
     const [valueInput, setValueInput] = useState();
 
     const handleClick = () => {
+        addNewTodo(valueInput);
         console.log('Check value input: ', valueInput);
     }
 

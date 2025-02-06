@@ -14,20 +14,28 @@ import { useState } from 'react';
 const App = () => {
   // const [count, setCount] = useState(0)
 
+  const [todoList, setTodoList] = useState([
+    { id: 1, name: 'Data - 03' },
+    { id: 2, name: 'Data - 04' },
+  ])
+
   const clb = 'Chelsea';
   const info = {
     name: 'Hieu',
     age: 22
   }
 
-  const myFunction = (name) => {
-    alert(`Call me ${name}`);
+  const addNewTodo = (name) => {
+    const newTodo = {
+      id: randomIntFromInterval(1, 100),
+      name: name
+    }
+    setTodoList([...todoList, newTodo]);
   }
 
-  const [todoList, setTodoList] = useState([
-    { id: 1, name: 'Data - 03' },
-    { id: 2, name: 'Data - 04' },
-  ])
+  const randomIntFromInterval = (min, max) => { // min and max included  
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
 
   return (
     <>
@@ -35,7 +43,7 @@ const App = () => {
         <h1 className='todo-title'>TO DO LIST</h1>
 
         <TodoBox1
-          myFunction={myFunction}
+          addNewTodo={addNewTodo}
         />
         <TodoBox2
           club={clb}
