@@ -45,15 +45,36 @@ const App = () => {
         <TodoBox1
           addNewTodo={addNewTodo}
         />
-        <TodoBox2
-          // club={clb}
-          // information={info}
-          todoList={todoList}
-        />
 
-        <div className='todo-logo'>
-          <img src={reactLogo} alt="" />
-        </div>
+        {/* {todoList.length > 0 &&
+          <TodoBox2
+            // club={clb}
+            // information={info}
+            todoList={todoList}
+          />
+        }
+
+        {todoList.length === 0 &&
+          <div className='todo-logo'>
+            <img src={reactLogo} alt="" />
+          </div>
+        } */}
+
+        {
+          todoList.length > 0 ?
+            <TodoBox2
+              // club={clb}
+              // information={info}
+              todoList={todoList}
+            />
+
+            :
+
+            <div className='todo-logo'>
+              <img src={reactLogo} alt="" />
+            </div>
+        }
+
       </div>
     </>
   )
