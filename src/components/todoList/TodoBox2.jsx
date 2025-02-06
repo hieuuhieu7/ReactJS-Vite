@@ -1,6 +1,11 @@
 
 const TodoBox2 = (props) => {
-    const { todoList } = props;
+    const { todoList, deleteTodo } = props;
+
+    const handleClick = (id) => {
+        deleteTodo(id)
+    }
+
     return (
         <div className="todo-box-2">
             {todoList.map((item, index) => {
@@ -8,7 +13,9 @@ const TodoBox2 = (props) => {
                 return (
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "10px" }} key={item.id} >
                         <div>{item.name}</div>
-                        <button style={{ cursor: "pointer" }}>Delete</button>
+                        <button
+                            onClick={() => { handleClick(item.id) }}
+                            style={{ cursor: "pointer" }}>Delete</button>
                     </div>
                 )
             })}
