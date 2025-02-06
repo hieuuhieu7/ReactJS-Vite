@@ -15,15 +15,15 @@ const App = () => {
   // const [count, setCount] = useState(0)
 
   const [todoList, setTodoList] = useState([
-    { id: 1, name: 'Data - 03' },
-    { id: 2, name: 'Data - 04' },
+    // { id: 1, name: 'Data - 03' },
+    // { id: 2, name: 'Data - 04' },
   ])
 
-  const clb = 'Chelsea';
-  const info = {
-    name: 'Hieu',
-    age: 22
-  }
+  // const clb = 'Chelsea';
+  // const info = {
+  //   name: 'Hieu',
+  //   age: 22
+  // }
 
   const addNewTodo = (name) => {
     const newTodo = {
@@ -46,8 +46,8 @@ const App = () => {
           addNewTodo={addNewTodo}
         />
         <TodoBox2
-          club={clb}
-          information={info}
+          // club={clb}
+          // information={info}
           todoList={todoList}
         />
 
@@ -55,8 +55,6 @@ const App = () => {
           <img src={reactLogo} alt="" />
         </div>
       </div>
-
-      <img src="" alt="" />
     </>
   )
 }

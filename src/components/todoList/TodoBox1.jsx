@@ -4,10 +4,11 @@ const TodoBox1 = (props) => {
     const { addNewTodo } = props;
     // myFunction('Hieu');
 
-    const [valueInput, setValueInput] = useState();
+    const [valueInput, setValueInput] = useState('Hieu');
 
     const handleClick = () => {
         addNewTodo(valueInput);
+        setValueInput('');
         console.log('Check value input: ', valueInput);
     }
 
@@ -17,7 +18,12 @@ const TodoBox1 = (props) => {
 
     return (
         <div className="todo-box-1">
-            <input onChange={(event) => { inputChange(event.target.value) }} type="text" placeholder="Import data" />
+            <input onChange={(event) => { inputChange(event.target.value) }}
+                value={valueInput}
+                type="text"
+                placeholder="Import data"
+            />
+
             <button onClick={handleClick} >ADD</button>
 
             <div>

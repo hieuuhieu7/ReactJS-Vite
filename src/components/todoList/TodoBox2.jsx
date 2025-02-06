@@ -1,16 +1,17 @@
 
 const TodoBox2 = (props) => {
-    const { club, information, todoList } = props;
-    console.log(props);
+    const { todoList } = props;
     return (
         <div className="todo-box-2">
-            <p>Data - 01 </p>
-            <p>Data - 02</p>
-            <p>CLB yeu thich {club}</p>
-            <p>Toi ten la {information.name}</p>
-            <div>
-                {JSON.stringify(props.todoList)}
-            </div>
+            {todoList.map((item, index) => {
+                console.log('Check: ', item, index);
+                return (
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "10px" }} key={item.id} >
+                        <div>{item.name}</div>
+                        <button style={{ cursor: "pointer" }}>Delete</button>
+                    </div>
+                )
+            })}
         </div>
     )
 }
