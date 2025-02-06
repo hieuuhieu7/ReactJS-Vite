@@ -19,12 +19,18 @@ const App = () => {
     age: 22
   }
 
+  const myFunction = (name) => {
+    alert(`Call me ${name}`);
+  }
+
   return (
     <>
       <div className="todo-container">
         <h1 className='todo-title'>TO DO LIST</h1>
 
-        <TodoBox1 />
+        <TodoBox1
+          myFunction={myFunction}
+        />
         <TodoBox2
           club={clb}
           information={info}
