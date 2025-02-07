@@ -6,6 +6,7 @@ import TodoBox2 from './components/todoList/TodoBox2';
 import { useState } from 'react';
 import Header from './components/layout/header';
 import Footer from './components/layout/footer';
+import { Outlet } from 'react-router-dom';
 
 const App = () => {
 
@@ -34,13 +35,10 @@ const App = () => {
   return (
     <>
       <Header />
-
       <div className="todo-container">
         <h1 className='todo-title'>TO DO LIST</h1>
         <TodoBox1
-          addNewTodo={addNewTodo}
-        />
-
+          addNewTodo={addNewTodo} />
         {
           todoList.length > 0 ?
             <TodoBox2
@@ -52,7 +50,7 @@ const App = () => {
             </div>
         }
       </div>
-
+      <Outlet />
       <Footer />
     </>
   )
