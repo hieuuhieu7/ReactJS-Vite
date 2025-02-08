@@ -3,11 +3,21 @@ import { useState } from "react";
 import axios from 'axios';
 import { createUserApi } from "../../services/api.service";
 
-const UserForm = () => {
+const UserForm = (props) => {
+    const { loadUser } = props;
+
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [phone, setPhone] = useState("");
+
+    const resetInput = () => {
+        setIsModalOpen(false)
+        setFullName("")
+        setEmail("")
+        setPassword("")
+        setPhone("")
+    }
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const showModal = () => {
@@ -29,7 +39,8 @@ const UserForm = () => {
                     description: 'Tạo User thành công!'
                 }
             )
-            setIsModalOpen(false);
+            resetInput();
+            loadUser();
         } else {
             notification.error(
                 {
@@ -46,14 +57,14 @@ const UserForm = () => {
         <div style={{ marginTop: "40px", padding: "0px 60px 40px 60px", gap: "20px" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                    <h2>Create User</h2>
+                    <h2>List Users</h2>
                     <Button type="primary" onClick={showModal} >Create</Button>
                 </div>
 
                 <Modal title="Create User"
                     open={isModalOpen}
                     onOk={handleCreateUser}
-                    onCancel={handleCancel}
+                    onCancel={resetInput}
                     okText="Create"
                     maskClosable={false}
                 >
