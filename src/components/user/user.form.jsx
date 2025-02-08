@@ -1,23 +1,35 @@
-import { Button, Flex, Input } from "antd";
+import { Button, Flex, Input, notification } from "antd";
 import { useState } from "react";
 import axios from 'axios';
+import { createUserApi } from "../../services/api.service";
 
 const UserForm = () => {
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [phone, setPhone] = useState("");
-    const handleClick = () => {
-        const URL_BACKEND = "http://localhost:8080/api/v1/user";
-        const data = {
-            fullName: fullName,
-            email: email,
-            password: password,
-            phone: phone
+
+    const handleClick = async () => {
+        const res = await createUserApi(fullName, email, password, phone)
+        if (res.data) {
+            notification.success(
+                {
+                    message: "Create User",
+                    description: 'Tạo User thành công!'
+                }
+            )
+        } else {
+            notification.error(
+                {
+                    message: "Error Create User",
+                    description: 'Tạo User thất bại!'
+                    // description: JSON.stringify(res.message)
+                }
+            )
         }
-        axios.post(URL_BACKEND, data);
-        console.log('Check input: ', { fullName, email, password, phone });
+        console.log('Result ', res.data);
     }
+
     return (
         <div style={{ marginTop: "40px", padding: "0px 60px 40px 60px", gap: "20px" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
