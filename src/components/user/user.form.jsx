@@ -1,4 +1,4 @@
-import { Button, Flex, Input, notification } from "antd";
+import { Button, Flex, Input, notification, Modal } from "antd";
 import { useState } from "react";
 import axios from 'axios';
 import { createUserApi } from "../../services/api.service";
@@ -9,7 +9,18 @@ const UserForm = () => {
     const [password, setPassword] = useState("");
     const [phone, setPhone] = useState("");
 
-    const handleClick = async () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleCreateUser = async () => {
         const res = await createUserApi(fullName, email, password, phone)
         if (res.data) {
             notification.success(
@@ -18,6 +29,7 @@ const UserForm = () => {
                     description: 'Tạo User thành công!'
                 }
             )
+            setIsModalOpen(false);
         } else {
             notification.error(
                 {
@@ -33,40 +45,52 @@ const UserForm = () => {
     return (
         <div style={{ marginTop: "40px", padding: "0px 60px 40px 60px", gap: "20px" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-                <h2>Add User</h2>
-                <div className="form-group">
-                    <span>Full name</span>
-                    <Input
-                        value={fullName}
-                        onChange={(event) => { setFullName(event.target.value) }}
-                    />
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <h2>Create User</h2>
+                    <Button type="primary" onClick={showModal} >Create</Button>
                 </div>
 
-                <div className="form-group">
-                    <span>Email</span>
-                    <Input
-                        value={email}
-                        onChange={(event) => { setEmail(event.target.value) }}
-                    />
-                </div>
+                <Modal title="Create User"
+                    open={isModalOpen}
+                    onOk={handleCreateUser}
+                    onCancel={handleCancel}
+                    okText="Create"
+                    maskClosable={false}
+                >
+                    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                        <div className="form-group">
+                            <span>Full name</span>
+                            <Input
+                                value={fullName}
+                                onChange={(event) => { setFullName(event.target.value) }}
+                            />
+                        </div>
 
-                <div className="form-group">
-                    <span>Password</span>
-                    <Input.Password
-                        value={password}
-                        onChange={(event) => { setPassword(event.target.value) }}
-                    />
-                </div>
+                        <div className="form-group">
+                            <span>Email</span>
+                            <Input
+                                value={email}
+                                onChange={(event) => { setEmail(event.target.value) }}
+                            />
+                        </div>
 
-                <div className="form-group">
-                    <span>Phone number</span>
-                    <Input
-                        value={phone}
-                        onChange={(event) => { setPhone(event.target.value) }}
-                    />
-                </div>
+                        <div className="form-group">
+                            <span>Password</span>
+                            <Input.Password
+                                value={password}
+                                onChange={(event) => { setPassword(event.target.value) }}
+                            />
+                        </div>
 
-                <Button type="primary" onClick={handleClick} >Create</Button>
+                        <div className="form-group">
+                            <span>Phone number</span>
+                            <Input
+                                value={phone}
+                                onChange={(event) => { setPhone(event.target.value) }}
+                            />
+                        </div>
+                    </div>
+                </Modal>
             </div>
         </div>
     );
