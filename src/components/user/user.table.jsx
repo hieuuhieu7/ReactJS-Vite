@@ -1,12 +1,17 @@
 import { Space, Table, Tag } from 'antd';
 import UserUpdate from './user.update';
 import { useState } from "react";
+import UserDetail from './user.detail';
 
 
 const UserTable = (props) => {
     const { dataUser, loadUser } = props;
+
     const [isModalUpdate, setIsModalUpdate] = useState(false);
     const [dataUpdate, setDataUpdate] = useState(null);
+
+    const [open, setOpen] = useState(false);
+    const [dataDetail, setDataDetail] = useState(null);
 
     const columns = [
         {
@@ -15,7 +20,14 @@ const UserTable = (props) => {
             key: '_id',
             render: (_, record) => {
                 return (
-                    <a href='#'>{record._id}</a>
+                    <a
+                        onClick={() => {
+                            setOpen(true)
+                            setDataDetail(record)
+                        }}
+                    >
+                        {record._id}
+                    </a>
                 );
             }
         },
@@ -66,6 +78,13 @@ const UserTable = (props) => {
                 dataUpdate={dataUpdate}
                 setDataUpdate={setDataUpdate}
                 loadUser={loadUser}
+            />
+
+            <UserDetail
+                open={open}
+                setOpen={setOpen}
+                dataDetail={dataDetail}
+                setDataDetail={setDataDetail}
             />
         </>
     );
