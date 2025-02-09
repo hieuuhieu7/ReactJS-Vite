@@ -1,8 +1,8 @@
-import { Space, Table, Tag } from 'antd';
+import { Space, Table, Popconfirm, notification } from 'antd';
 import UserUpdate from './user.update';
 import { useState } from "react";
 import UserDetail from './user.detail';
-
+import { deleteUserApi } from '../../services/api.service';
 
 const UserTable = (props) => {
     const { dataUser, loadUser } = props;
@@ -57,13 +57,46 @@ const UserTable = (props) => {
                             setDataUpdate(record)
                         }}
                     >
-                        Edit {record.name}
+                        Edit
                     </a>
-                    <a>Delete</a>
+
+                    <Popconfirm
+                        title="Delete User"
+                        description="Bạn có muốn xóa User này không?"
+                        onConfirm={() => { deleteUser(record._id) }}
+                        okText="Yes"
+                        cancelText="No"
+                        placement="left"
+                    >
+                        <a>Delete</a>
+                    </Popconfirm>
                 </Space>
             ),
         },
     ];
+
+    const deleteUser = async (id) => {
+        const res = await deleteUserApi(id)
+        if (res.data) {
+            notification.success(
+                {
+                    message: "Delete User",
+                    description: 'Xóa User thành công!'
+                }
+            )
+            await loadUser();
+        } else {
+            notification.error(
+                {
+                    message: "Error Delete User",
+                    description: 'Xóa User thất bại!'
+                    // description: JSON.stringify(res.message)
+                }
+            )
+        }
+        console.log('Result ', res.data);
+    }
+
     // console.log('Check data: ', dataUpdate);
     return (
         <>
