@@ -18,8 +18,14 @@ const fetchAllUserApi = () => {
     return axios.get(URL_BACKEND);
 }
 
-const updateUserApi = () => {
-
+const updateUserApi = (_id, fullName, phone) => {
+    const URL_BACKEND = "/api/v1/user";
+    const data = {
+        _id: _id,
+        fullName: fullName,
+        phone: phone
+    }
+    return axios.put(URL_BACKEND, data);
 }
 
 const deleteUserApi = () => {

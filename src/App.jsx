@@ -7,7 +7,9 @@ const App = () => {
   return (
     <>
       <Header />
-      <Outlet />
+      <div style={{ padding: "0px 40px 0px 40px" }}>
+        <Outlet />
+      </div>
       {/* <Footer /> */}
     </>
   )
